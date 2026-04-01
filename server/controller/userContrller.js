@@ -39,6 +39,45 @@ class UserController {
             res.send({ msg: "Something Went Wrong" })
         }
     }
+
+    static addData = async (req, res) => {
+        try {
+            console.log(req.body)
+            const { name, age, contact } = req.body
+
+            const addData = await UserModel.create({
+                name, age, contact
+            })
+            if (addData) {
+                res.status(201).json({
+                    success: true,
+                    message: "User added Success"
+                })
+            }
+        } catch (error) {
+            console.log(error)
+            res.status(400).json({
+                success: false,
+                message: error.message
+            })
+        }
+    }
+    static allData = async (req, res) => {
+
+        try {
+            const allData = await UserModel.find()
+            res.status(200).json({
+                success: true,
+                message: "All data find success",
+                user: allData
+            })
+        } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message
+            })
+        }
+    }
 }
 
 export default UserController

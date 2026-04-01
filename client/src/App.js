@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import './App.css';
+import axios from 'axios'
 
 function App() {
   const data = [
@@ -7,6 +9,29 @@ function App() {
     { id: 3, name: "Michael Brown", age: 32, contact: "07876543210" },
     { id: 4, name: "Emma Wilson", age: 26, contact: "07765432109" }
   ];
+  const [users, setUsers] = useState([])
+
+  const [input, setInputs] = useState({})
+
+  // this function handles the change in the inputs
+  function handleChange(e) {
+    setInputs({ ...input, [e.target.name]: e.target.value })
+
+  }
+
+  async function handleSubmit() {
+    console.log(input)
+    await axios.post('http://localhost:5000/add-data', input).then((res) => {
+      console.log(res.data)
+    })
+
+  }
+  useEffect(() => {
+    axios.get('http://localhost:5000/get-all-data').then((res) => {
+      setUsers(res.data.user)
+      console.log(res.data.user)
+    })
+  }, [])
 
   return (
     <div className="App">
@@ -14,10 +39,10 @@ function App() {
 
       {/* Dummy Form UI */}
       <div className="form-container">
-        <input type='text' placeholder="Enter name" />
-        <input type='number' placeholder="Enter age" />
-        <input type='text' placeholder="Enter contact" />
-        <button className="submit-btn">Add</button>
+        <input type='text' name='name' onChange={handleChange} placeholder="Enter name" />
+        <input type='number' name='age' onChange={handleChange} placeholder="Enter age" />
+        <input type='text' name='contact' onChange={handleChange} placeholder="Enter contact" />
+        <button className="submit-btn" onClick={handleSubmit}>Add</button>
       </div>
 
       {/* Table */}
@@ -32,7 +57,7 @@ function App() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
+            {users.map((item) => (
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.age}</td>
