@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import axios from 'axios'
+import axios from 'axios';
+import { server } from './utils/server'
 
 function App() {
   const data = [
@@ -21,11 +22,23 @@ function App() {
 
   async function handleSubmit() {
     console.log(input)
-    await axios.post('http://localhost:5000/add-data', input).then((res) => {
+    await axios.post(`${server}/add-data`, input).then((res) => {
       console.log(res.data)
+      setUsers([...users, input])
     })
 
   }
+
+  // delete particular user
+  async function deleteUser(id) {
+    console.log(id)
+    await axios.delete(`${server}/delete-user/${id}`).then((res) => {
+      console.log(res.data)
+      setUsers(users.filter(user => user._id !== id));
+    })
+  }
+
+  // fetching the all user from the database
   useEffect(() => {
     axios.get('http://localhost:5000/get-all-data').then((res) => {
       setUsers(res.data.user)
@@ -64,7 +77,7 @@ function App() {
                 <td>{item.contact}</td>
                 <td>
                   <button className="update-btn">Update</button>
-                  <button className="delete-btn">Delete</button>
+                  <button className="delete-btn" onClick={() => { deleteUser(item._id) }}>Delete</button>
                 </td>
               </tr>
             ))}

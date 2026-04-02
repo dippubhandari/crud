@@ -14,6 +14,28 @@ class UserController {
             console.log(error)
         }
     }
+
+    // deleting particular user
+
+    static deleteUser = async (req, res) => {
+        try {
+            const id = req.params.id
+            const deleteUser = await UserModel.findByIdAndDelete(id)
+            if (deleteUser) {
+                res.status(200).json({
+                    message: "The user is deleted successfullyh",
+                    success: true
+                })
+            }
+
+        } catch (error) {
+            res.status(500).json({
+                message: "Something Went Wrong",
+                success: false
+            })
+        }
+    }
+
     static hello = (req, res) => {
         console.log("This is inside hello controller")
         res.send("Hello response")
