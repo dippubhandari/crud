@@ -11,6 +11,7 @@ app.use(cors());
 
 // routes
 
+app.use('/images', express.static('images'));
 app.use(express.json())
 app.use('/', userRoutes)
 // database connnection

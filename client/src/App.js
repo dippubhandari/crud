@@ -22,8 +22,8 @@ function App() {
     //   console.log(key, value);
     // }
     // console.log(input)
-    await axios.post(`${server}/add-data`, formData).then(() => {
-
+    await axios.post(`${server}/add-data`, formData).then((res) => {
+      console.log(res.data)
     })
   }
 
@@ -40,6 +40,7 @@ function App() {
   }
   useEffect(() => {
     axios.get('http://localhost:5000/get-all-data').then((res) => {
+      console.log(res.data)
       setUsers(res.data.user)
     })
   }, [])
@@ -85,7 +86,7 @@ function App() {
               <tr key={index}>
                 <td>
                   <img
-                    src={item.image || "https://i.pravatar.cc/150"}
+                    src={item.image ? `${server}/${item.image}` : "https://i.pravatar.cc/150"}
                     alt="user"
                     className="avatar"
                   />

@@ -66,7 +66,7 @@ class UserController {
         try {
 
             const { name, age, contact } = req.body
-            const image = req.file.filename
+            const image = req.file ? req.file.path : null;
             console.log(name, age, contact, image)
             const addData = await UserModel.create({ name, age, contact, image })
             console.log("data added")
@@ -76,6 +76,7 @@ class UserController {
                     success: true,
                     message: "Successfully Data Added"
                 })
+
             }
             else {
                 console.log("data not added")
