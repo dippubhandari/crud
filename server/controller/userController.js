@@ -64,21 +64,29 @@ class UserController {
 
     static addData = async (req, res) => {
         try {
-            console.log(req.body)
-            const { name, age, contact } = req.body
 
-            const addData = await UserModel.create({
-                name, age, contact
-            })
+            const { name, age, contact } = req.body
+            const image = req.file.filename
+            console.log(name, age, contact, image)
+            const addData = await UserModel.create({ name, age, contact, image })
+            console.log("data added")
             if (addData) {
-                res.status(201).json({
+                console.log("data added")
+                res.status(200).json({
                     success: true,
-                    message: "User added Success"
+                    message: "Successfully Data Added"
+                })
+            }
+            else {
+                console.log("data not added")
+                res.status(400).json({
+                    success: false,
+                    message: error.message
                 })
             }
         } catch (error) {
             console.log(error)
-            res.status(400).json({
+            res.status(500).json({
                 success: false,
                 message: error.message
             })

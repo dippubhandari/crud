@@ -112,3 +112,16 @@ tbody tr:hover {
 .delete-btn:hover {
   background: #d32f2f;
 }
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #4facfe;
+  transition: 0.3s;
+}
+
+.avatar:hover {
+  transform: scale(1.1);
+}
