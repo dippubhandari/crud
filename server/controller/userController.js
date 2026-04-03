@@ -74,7 +74,8 @@ class UserController {
                 console.log("data added")
                 res.status(200).json({
                     success: true,
-                    message: "Successfully Data Added"
+                    message: "Successfully Data Added",
+                    user: addData
                 })
 
             }
