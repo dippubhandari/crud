@@ -4,8 +4,12 @@ import axios from 'axios';
 import { server } from './utils/server'
 
 function App() {
+  // all uses here 
   const [users, setUsers] = useState([])
+  //  user inputs
   const [input, setInputs] = useState({})
+  // image preview
+  const [preview, setPreview] = useState(null);
 
   function handleChange(e) {
     setInputs({ ...input, [e.target.name]: e.target.value })
@@ -18,10 +22,6 @@ function App() {
     formData.append('age', input.age)
     formData.append('contact', input.contact)
     formData.append('image', input.image)
-    // for (let [key, value] of formData.entries()) {
-    //   console.log(key, value);
-    // }
-    // console.log(input)
     await axios.post(`${server}/add-data`, formData).then((res) => {
       console.log(res.data)
     })
@@ -36,6 +36,7 @@ function App() {
   function handleImage(e) {
     const image = e.target.files[0]
     console.log(image)
+    setPreview(URL.createObjectURL(image));
     setInputs({ ...input, [e.target.name]: image })
   }
   useEffect(() => {
@@ -63,10 +64,10 @@ function App() {
       </form>
 
       {/* Preview Image (optional but cool) */}
-      {input.image && (
+      {preview && (
         <div style={{ textAlign: 'center' }}>
           <p>Preview:</p>
-          <img src={input.image} alt="preview" className="avatar" />
+          <img src={preview} alt="preview" className="avatar" />
         </div>
       )}
 
