@@ -36,9 +36,15 @@ function UpdateProfileUI() {
         formData.append('name', user.name)
         formData.append('age', user.age)
         formData.append('contact', user.contact)
-        formData.append('image', user.image)
+        // Only append image if user selected a new file
+        if (user.image instanceof File) {
+            formData.append("image", user.image);
+        }
+        // formData.append('image', user.image)
         await axios.patch(`${server}/update-user-data/${user._id}`, formData).then((res) => {
             console.log(res.data)
+            alert(res.data.message)
+            setUser(res.data.updatedUser)
         })
     }
 
@@ -58,7 +64,15 @@ function UpdateProfileUI() {
             <div className="card">
                 <div className="profile-header">
                     <div className="image-box">
-                        <img src={`${server}/${user.image}`} alt="profile" />
+                        <img
+                            src={
+                                user.image instanceof File
+                                    ? URL.createObjectURL(user.image) // preview new file
+                                    : user.image
+                                        ? `${server}/${user.image}`   // existing image from server
+                                        : "default-avatar.png"       // optional placeholder
+                            }
+                            alt="profile" />
                     </div>
                     <h2>Update Profile</h2>
                 </div>
@@ -67,7 +81,7 @@ function UpdateProfileUI() {
                     <input type="text" name="name" value={user.name} onChange={hadleChange} placeholder="Name" />
                     <input type="number" name="age" value={user.age} onChange={hadleChange} placeholder="Age" />
                     <input type="text" name="contact" value={user.contact} onChange={hadleChange} placeholder="Contact" />
-                    <input type="file" name="image" />
+                    <input type="file" name="image" onChange={hadleChange} />
 
                     <button onClick={handleSubmit}>Update Profile</button>
                 </div>

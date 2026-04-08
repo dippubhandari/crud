@@ -138,7 +138,7 @@ class UserController {
             const updateFields = req.body
             console.log(updateFields)
             if (req.file) {
-                updateFields.file = req.file.path
+                updateFields.image = req.file.path
             }
             const updatedUser = await UserModel.findByIdAndUpdate(
                 id,
