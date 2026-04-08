@@ -22,6 +22,7 @@ userRoutes.delete('/delete-all-users', UserController.deleteAllUsers)
 userRoutes.get('/hello', UserController.hello)
 userRoutes.post('/add-data', upload.single('image'), UserController.addData)
 userRoutes.get('/get-all-data', UserController.allData)
+userRoutes.get('/get-user/:id', UserController.getParticularUser)
 
 userRoutes.delete('/delete-user/:id', UserController.deleteUser)
 

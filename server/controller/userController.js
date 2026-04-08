@@ -110,6 +110,37 @@ class UserController {
             })
         }
     }
+
+    // fetching particular user based on id
+
+    static getParticularUser = async (req, res) => {
+        try {
+            console.log("this works")
+            const id = req.params.id
+            console.log(id)
+
+            const user = await UserModel.findById(id)
+            if (user) {
+                res.status(200).json({
+                    success: true,
+                    message: "User data sent",
+                    user
+                })
+            }
+            else {
+                res.status(50).json({
+                    success: false,
+                    message: "Something went wrong",
+
+                })
+            }
+        } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message
+            })
+        }
+    }
 }
 
 export default UserController

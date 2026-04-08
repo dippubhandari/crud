@@ -101,7 +101,7 @@ function Home() {
                                 <td>{item.contact}</td>
                                 <td>
                                     <button className="update-btn" onClick={() => {
-                                        navigate('/update-data')
+                                        navigate(`/update-data/${item._id}`)
                                     }}>Update</button>
                                     <button className="delete-btn" onClick={() => deleteUser(item._id)}>Delete</button>
                                 </td>

@@ -11,7 +11,8 @@ const AppRoutes = () => {
 
                 <Route path='/' element={<Home />} />
                 <Route path='/home' element={<Home />} />
-                <Route path='/update-data' element={<UpdateProfileUI />} />
+                <Route path='/update-data/:id' element={<UpdateProfileUI />} />
+                <Route path='*' element={"Page Not Found"} />
 
             </Routes>
 
