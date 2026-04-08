@@ -11,7 +11,6 @@ class UserController {
                 res.send("Not Delted")
             }
         } catch (error) {
-            console.log(error)
         }
     }
 
@@ -37,11 +36,9 @@ class UserController {
     }
 
     static hello = (req, res) => {
-        console.log("This is inside hello controller")
         res.send("Hello response")
     }
     static userData = (req, res) => {
-        console.log("User Controller runs")
         res.send("Hellow i am from controller")
     }
     static addUser = async (req, res) => {
@@ -57,7 +54,6 @@ class UserController {
                 res.send({ msg: "Account Created Succesfully" })
             }
         } catch (error) {
-            console.log(error)
             res.send({ msg: "Something Went Wrong" })
         }
     }
@@ -67,11 +63,8 @@ class UserController {
 
             const { name, age, contact } = req.body
             const image = req.file ? req.file.path : null;
-            console.log(name, age, contact, image)
             const addData = await UserModel.create({ name, age, contact, image })
-            console.log("data added")
             if (addData) {
-                console.log("data added")
                 res.status(200).json({
                     success: true,
                     message: "Successfully Data Added",
@@ -80,14 +73,12 @@ class UserController {
 
             }
             else {
-                console.log("data not added")
                 res.status(400).json({
                     success: false,
                     message: error.message
                 })
             }
         } catch (error) {
-            console.log(error)
             res.status(500).json({
                 success: false,
                 message: error.message
@@ -115,9 +106,7 @@ class UserController {
 
     static getParticularUser = async (req, res) => {
         try {
-            console.log("this works")
             const id = req.params.id
-            console.log(id)
 
             const user = await UserModel.findById(id)
             if (user) {
@@ -132,6 +121,42 @@ class UserController {
                     success: false,
                     message: "Something went wrong",
 
+                })
+            }
+        } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message
+            })
+        }
+    }
+
+    // updating the particular user 
+    static updateUserData = async (req, res) => {
+        try {
+            const id = req.params.id
+            const updateFields = req.body
+            console.log(updateFields)
+            if (req.file) {
+                updateFields.file = req.file.path
+            }
+            const updatedUser = await UserModel.findByIdAndUpdate(
+                id,
+                { $set: updateFields },
+                { new: true }
+            );
+            if (updatedUser) {
+                res.status(200).json({
+                    success: true,
+                    message: "Updated Successfully",
+                    updatedUser: updatedUser
+                })
+            }
+            else {
+                res.status(500).json({
+                    success: false,
+                    message: "Something Went Wrong",
+                    updatedUser
                 })
             }
         } catch (error) {

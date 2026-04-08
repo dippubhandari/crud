@@ -24,6 +24,8 @@ userRoutes.post('/add-data', upload.single('image'), UserController.addData)
 userRoutes.get('/get-all-data', UserController.allData)
 userRoutes.get('/get-user/:id', UserController.getParticularUser)
 
+userRoutes.patch('/update-user-data/:id', upload.single('image'), UserController.updateUserData)
+
 userRoutes.delete('/delete-user/:id', UserController.deleteUser)
 
 export default userRoutes

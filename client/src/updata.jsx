@@ -23,13 +23,25 @@ function UpdateProfileUI() {
         // if user is updating image
         if (name == 'image') {
             setUser({ ...user, image: files[0] })
-            console.log(user)
         }
         else {
-            setUser({ ...user, [name]: [value] })
-            console.log(user)
+            setUser({ ...user, [name]: value })
         }
     }
+
+    // handling the submit the update 
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append('name', user.name)
+        formData.append('age', user.age)
+        formData.append('contact', user.contact)
+        formData.append('image', user.image)
+        await axios.patch(`${server}/update-user-data/${user._id}`, formData).then((res) => {
+            console.log(res.data)
+        })
+    }
+
 
     // fetching particular user data from the database
 
@@ -57,7 +69,7 @@ function UpdateProfileUI() {
                     <input type="text" name="contact" value={user.contact} onChange={hadleChange} placeholder="Contact" />
                     <input type="file" name="image" />
 
-                    <button>Update Profile</button>
+                    <button onClick={handleSubmit}>Update Profile</button>
                 </div>
             </div>
         </div>
