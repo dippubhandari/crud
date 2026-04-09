@@ -22,7 +22,7 @@ class UserController {
             const deleteUser = await UserModel.findByIdAndDelete(id)
             if (deleteUser) {
                 res.status(200).json({
-                    message: "The user is deleted successfullyh",
+                    message: "The user is deleted successfully",
                     success: true
                 })
             }

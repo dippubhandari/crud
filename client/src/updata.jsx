@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./update.css";
 import axios from 'axios'
 import { server } from './utils/server'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 
 function UpdateProfileUI() {
@@ -60,33 +60,37 @@ function UpdateProfileUI() {
     }, [])
 
     return (
-        <div className="container">
-            <div className="card">
-                <div className="profile-header">
-                    <div className="image-box">
-                        <img
-                            src={
-                                user.image instanceof File
-                                    ? URL.createObjectURL(user.image) // preview new file
-                                    : user.image
-                                        ? `${server}/${user.image}`   // existing image from server
-                                        : "default-avatar.png"       // optional placeholder
-                            }
-                            alt="profile" />
+        <>
+            <Link to="/" className="home-link">Home</Link>
+            <div className="container">
+
+                <div className="card">
+                    <div className="profile-header">
+                        <div className="image-box">
+                            <img
+                                src={
+                                    user.image instanceof File
+                                        ? URL.createObjectURL(user.image) // preview new file
+                                        : user.image
+                                            ? `${server}/${user.image}`   // existing image from server
+                                            : "default-avatar.png"       // optional placeholder
+                                }
+                                alt="profile" />
+                        </div>
+                        <h2>Update Profile</h2>
                     </div>
-                    <h2>Update Profile</h2>
-                </div>
 
-                <div className="form">
-                    <input type="text" name="name" value={user.name} onChange={hadleChange} placeholder="Name" />
-                    <input type="number" name="age" value={user.age} onChange={hadleChange} placeholder="Age" />
-                    <input type="text" name="contact" value={user.contact} onChange={hadleChange} placeholder="Contact" />
-                    <input type="file" name="image" onChange={hadleChange} />
+                    <div className="form">
+                        <input type="text" name="name" value={user.name} onChange={hadleChange} placeholder="Name" />
+                        <input type="number" name="age" value={user.age} onChange={hadleChange} placeholder="Age" />
+                        <input type="text" name="contact" value={user.contact} onChange={hadleChange} placeholder="Contact" />
+                        <input type="file" name="image" onChange={hadleChange} />
 
-                    <button onClick={handleSubmit}>Update Profile</button>
+                        <button onClick={handleSubmit}>Update Profile</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

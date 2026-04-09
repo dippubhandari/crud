@@ -1,127 +1,186 @@
-/* App.css */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+/* Body */
 body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #eef2f7, #e3f2fd);
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  min-height: 100vh;
 }
 
+/* Main App */
+.App {
+  padding: 30px 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* Heading */
 .heading {
-  background: linear-gradient(90deg, #4facfe, #00f2fe);
-  color: white;
-  padding: 15px;
-  margin: 0;
-  font-size: 28px;
   text-align: center;
+  color: #fff;
+  font-size: 32px;
+  margin-bottom: 25px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
+/* Form Container */
 .form-container {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin: 25px auto;
-  flex-wrap: wrap;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  margin-bottom: 25px;
+  animation: fadeIn 0.5s ease;
 }
 
+/* Inputs */
 .form-container input {
-  padding: 12px;
+  padding: 10px 12px;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  width: 200px;
+  border: 1px solid #ddd;
   outline: none;
+  font-size: 14px;
+  background: #f9f9f9;
   transition: 0.3s;
 }
 
 .form-container input:focus {
   border-color: #4facfe;
-  box-shadow: 0 0 6px rgba(79, 172, 254, 0.5);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
 }
 
+/* File Input */
+.form-container input[type="file"] {
+  padding: 6px;
+  background: #fff;
+}
+
+/* Submit Button */
 .submit-btn {
-  padding: 12px 20px;
+  background: linear-gradient(135deg, #43e97b, #38f9d7);
+  color: #fff;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(90deg, #4caf50, #66bb6a);
-  color: white;
+  font-weight: 600;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .submit-btn:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
+.submit-btn:active {
+  transform: scale(0.95);
+}
+
+/* Preview Section */
+.avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 10px;
+  border: 3px solid #4facfe;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Container */
 .table-container {
-  width: 85%;
-  margin: 30px auto;
-  background: white;
-  padding: 20px;
+  margin-top: 20px;
+  overflow-x: auto;
+  background: #ffffff;
   border-radius: 15px;
-  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.6s ease;
 }
 
+/* Table */
 table {
   width: 100%;
   border-collapse: collapse;
 }
 
+/* Table Head */
 thead {
-  background: linear-gradient(90deg, #4facfe, #00c6ff);
-  color: white;
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: #fff;
 }
 
-th,
-td {
-  padding: 14px;
+thead th {
+  padding: 12px;
+  font-size: 14px;
   text-align: center;
 }
 
-tbody tr {
+/* Table Body */
+tbody td {
+  padding: 12px;
+  text-align: center;
   border-bottom: 1px solid #eee;
-  transition: 0.2s;
+  font-size: 14px;
 }
 
+/* Row Hover */
 tbody tr:hover {
-  background: #f1f7ff;
+  background: #f5f9ff;
+  transition: 0.3s;
 }
 
-.update-btn {
-  padding: 7px 14px;
-  margin-right: 8px;
+/* Buttons */
+.update-btn,
+.delete-btn {
+  padding: 6px 12px;
   border: none;
   border-radius: 8px;
-  background: #ffc107;
+  margin: 3px;
+  font-size: 13px;
   cursor: pointer;
   transition: 0.3s;
+}
+
+/* Update Button */
+.update-btn {
+  background: linear-gradient(135deg, #f6d365, #fda085);
+  color: #fff;
 }
 
 .update-btn:hover {
-  background: #ffb300;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Delete Button */
 .delete-btn {
-  padding: 7px 14px;
-  border: none;
-  border-radius: 8px;
-  background: #f44336;
-  color: white;
-  cursor: pointer;
-  transition: 0.3s;
+  background: linear-gradient(135deg, #ff6a6a, #ff3d3d);
+  color: #fff;
 }
 
 .delete-btn:hover {
-  background: #d32f2f;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
 }
 
-.avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #4facfe;
-  transition: 0.3s;
-}
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
 
-.avatar:hover {
-  transform: scale(1.1);
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

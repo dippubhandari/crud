@@ -28,12 +28,16 @@ function Home() {
         await axios.post(`${server}/add-data`, formData).then((res) => {
             console.log(res.data)
             setUsers(prev => [...prev, res.data.user])
+            alert(res.data.message)
+            setPreview(null)
+            setInputs({})
         })
     }
 
     async function deleteUser(id) {
-        await axios.delete(`${server}/delete-user/${id}`).then(() => {
+        await axios.delete(`${server}/delete-user/${id}`).then((res) => {
             setUsers(users.filter(user => user._id !== id));
+            alert(res.data.message)
         })
     }
     // handling the image
@@ -50,6 +54,7 @@ function Home() {
         })
     }, [])
 
+    //
     return (
         <div className="App">
             <h1 className="heading">CRUD APP</h1>
